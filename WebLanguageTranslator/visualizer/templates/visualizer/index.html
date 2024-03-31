@@ -1,0 +1,50 @@
+{% extends 'visualizer/base/base.html' %}
+{% load static %}
+
+{% block title %} 
+Home | converter
+{% endblock %}  
+{% block body %}
+<div>
+
+    <script>
+        function speakWelcome() {
+            // Create an instance of the SpeechSynthesisUtterance object
+            var answer = document.getElementById('answer').value;;
+            var msg = new SpeechSynthesisUtterance(answer);
+            window.speechSynthesis.speak(msg);
+            
+        }
+      </script>
+
+    <div>
+        <div>
+            <img src="{% static 'visualizer/images/pixel.jpg'%}" 
+            alt="school image" width="40px" height="30px">
+            <h1>Welcome to local language translator</h1>
+        
+            <div>
+
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <p>Enter a Nyakyusa word here..</p>
+                    {{ TextInputForm.as_p }}
+                    <input type="submit" name="submit_text" value="translate"></input>
+                </form><br><br>
+
+                <div>
+                    <input type="text" id="answer" value="{{answer}}">
+                </div><br>
+         
+                <button onclick="speakWelcome()">listen</button><br><br>
+
+                <br><br><br><br><br><br><br><br><br><br>
+                <a href="{% url 'signin' %}">Sign in!</a>
+            </div>
+        </div>
+    </div>
+    <div>
+       
+    </div>
+</div>
+{% endblock %}
